@@ -15,3 +15,5 @@ class Image(db.Model):
             'userId': self.userId,
             'rankings': [ranking.toJSON() for ranking in self.rankings]
         }
+
+#testing push -jm
