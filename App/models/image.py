@@ -20,3 +20,4 @@ class Image(db.Model):
 #testing again-jm
 #testing 2-jg
 #testing to approve trello task -jm
+#demo
