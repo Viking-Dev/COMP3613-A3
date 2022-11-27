@@ -1,11 +1,15 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
-from flask import jsonif
+from flask import jsonify
 
-class User(db.Model):
+from flask_login import UserMixin
+
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False)
     password = db.Column(db.String(120), nullable=False)
+
+    feed = db.relationship('Feed', backref='feed', lazy=True, cascade="all, delete-orphan")
     images = db.relationship('Image', backref='image', lazy=True, cascade="all, delete-orphan")
     ratings = db.relationship('Rating', backref='rating', lazy=True, cascade="all, delete-orphan")
 
