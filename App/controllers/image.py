@@ -1,11 +1,12 @@
 from App.models import Image
 from App.database import db
 
-def create_image(userId):
-    newImage = Image(userId=userId)
+def create_image(userId, url):      #create image using id and the image    (updated)
+    newImage = Image(userId=userId, url=url)
     db.session.add(newImage)
     db.session.commit()
     return newImage
+
 
 def get_image(id):
     return Image.query.get(id)

@@ -50,29 +50,10 @@ def update_rating(id, score):
         return rating
     return None
 
-# def delete_rating(id):
-#     rating = get_rating(id)
-#     if rating:
-#         db.session.delete(rating)
-#         return db.session.commit()
-#     return None
-
-def get_calculated_rating(targetId):
-    ratings = Rating.query.filter_by(targetId=targetId)
-    total = 0
-    if ratings:
-        for rating in ratings:
-            total = total + rating.score
-        if ratings.count() != 0:
-            total = total / ratings.count()
-        return total
+def delete_rating(id):
+    rating = get_rating(id)
+    if rating:
+        db.session.delete(rating)
+        return db.session.commit()
     return None
 
-def get_level(id):
-    ratings = get_ratings_by_creator(id)
-    if ratings:
-        level = 0;
-        for rating in ratings:
-            level = level + 1
-        return level
-    return None
