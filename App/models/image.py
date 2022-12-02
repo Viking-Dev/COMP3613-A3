@@ -9,6 +9,7 @@ class Image(db.Model):
 
     def __init__(self, userId):
         self.userId = userId
+        self.url = url
 
     def toJSON(self):
         return{

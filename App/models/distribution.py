@@ -1,5 +1,5 @@
 from App.database import db
-from datetime import date
+import datetime 
 
 class Distribution(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,7 +9,7 @@ class Distribution(db.Model):
 
     def __init__(self, numprofiles):
         self.numprofiles = numprofiles
-        self.timeStamp = date.today()
+        self.timeStamp = datetime.datetime.now() 
 
 
     def toJSON(self):
