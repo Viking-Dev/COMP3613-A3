@@ -69,6 +69,8 @@ def create_feed_action():
             #flash("user: ")
             #flash(user)
             return render_template('feed.html', user=user, feeds= feeds)
+    user=get_user(feed.senderID)
+    return render_template('feed.html', user=user, feeds= feeds)
     #users = [get_user(feed.senderID) for feed in feeds]
     
             
