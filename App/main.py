@@ -19,7 +19,12 @@ from App.views import (
     image_views,
     rating_views,
     ranking_views,
-    index_views
+    index_views,
+    feed_views,
+    login_views,
+    signup_views,
+    logout_views,
+    dist_views
 )
 
 # New views must be imported and added to this list
@@ -29,7 +34,12 @@ views = [
     image_views,
     rating_views,
     ranking_views,
-    index_views
+    index_views, 
+    feed_views,
+    login_views,
+    signup_views,
+    logout_views,
+    dist_views
 ]
 
 def add_views(app, views):
@@ -69,4 +79,17 @@ def create_app(config={}):
     create_db(app)
     setup_jwt(app)
     app.app_context().push()
+    
+
+
+   #weird stuff make login work
+    login_manager = LoginManager()
+   # login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+    from .models import User
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
     return app
+    

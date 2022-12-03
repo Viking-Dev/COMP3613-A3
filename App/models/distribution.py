@@ -3,8 +3,8 @@ import datetime
 
 class Distribution(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    numprofiles = db.Column(db.Integer, nullable=False)    
-    timeStamp = db.Column(db.Date , nullable=False)                         
+    numprofiles = db.Column(db.Integer, nullable=False)   
+    timeStamp = db.Column(db.DateTime , nullable=False)                        
                   
 
     def __init__(self, numprofiles):

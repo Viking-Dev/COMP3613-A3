@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, jsonify, request, send_from_directory
+from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash
 from flask_jwt import jwt_required
+from flask_login import current_user
 
 
 from App.controllers import (
@@ -12,23 +13,27 @@ from App.controllers import (
     delete_user,
     login_user,
     logout_user,
-    get_level,
-    authenticate
+    authenticate,
+    get_top_profiles
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
-@user_views.route('/users', methods=['GET'])
-def get_user_page():
-    users = get_all_users()
-    return render_template('users.html', users=users)
+@user_views.route('/top/profiles', methods=['GET'])
+def get_top_profiles_action_ui():
+    users = get_top_profiles()
+    u=[]
+    for user in users:
+        if user != None:
+            u = u+[user]
 
-@user_views.route('/static/users')
-def static_user_page():
-  return send_from_directory('static', 'static-user.html')
+    return render_template("topProfile.html", users =u)
 
-@user_views.route('/api/users', methods=['POST'])
+
+
+#working
+@user_views.route('/api/create/users', methods=['POST'])
 def create_user_action():
     data = request.json
     user = get_user_by_username(data['username'])
@@ -37,10 +42,25 @@ def create_user_action():
     user = create_user(data['username'], data['password'])
     return jsonify({"message":"User Created"}) 
 
+#working
+# list users 
 @user_views.route('/api/users', methods=['GET'])
 def get_all_users_action():
     users = get_all_users_json()
-    return jsonify(users)
+    return jsonify(users)   
+
+
+# for UI
+@user_views.route('/users', methods=['GET'])
+def get_user_page():
+    users = get_all_users()
+    return render_template('users.html', users=users)
+
+
+
+@user_views.route('/static/users')
+def static_user_page():
+  return send_from_directory('static', 'static-user.html')
 
 @user_views.route('/api/users/byid', methods=['GET'])
 def get_user_action():
@@ -74,6 +94,9 @@ def delete_user_action():
         delete_user(data['id'])
         return jsonify({"message":"User Deleted"}) 
     return jsonify({"message":"User Not Found"}) 
+
+
+
 
 @user_views.route('/api/users/identify', methods=['GET'])
 @jwt_required()
