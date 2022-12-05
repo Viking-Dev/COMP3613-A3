@@ -18,8 +18,8 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-    
-    create_user("bob", "password")
+    #bob and bobpass for sir to login
+    create_user("bob", "bobpass")   
     create_image("1", "https://th.bing.com/th/id/OIP.REFN5HplO447i4UvNLizlwHaFn?pid=ImgDet&rs=1")
 
     create_user("betty", "password")
