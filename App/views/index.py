@@ -18,18 +18,7 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
 @index_views.route('/', methods=['GET'])
 def index_page():
-    #bob and bobpass for sir to login
-    create_user("bob", "bobpass")   
-    create_image("1", "https://th.bing.com/th/id/OIP.REFN5HplO447i4UvNLizlwHaFn?pid=ImgDet&rs=1")
-
-    create_user("betty", "password")
-    create_image("2", "https://th.bing.com/th/id/OIP.9nzbJlzKhuMzTLUOpObDDQHaHC?w=204&h=194&c=7&r=0&o=5&pid=1.7")
-
-    create_user("brian", "password")
-    create_image("3", "https://i0.wp.com/www.urbandognyc.com/wp-content/uploads/2018/10/brian-family-guy-dog-brought-back-to-life.jpg?fit=1500%2C1500&ssl=1")
     
-    create_user("bean", "password")
-    create_image("4", "https://th.bing.com/th/id/OIP.9vz9tEkrPSk41XpcOQWfpAHaEK?pid=ImgDet&rs=1")
     
     
    
